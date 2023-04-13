@@ -1,9 +1,10 @@
 # TODO
 1. fix color handling in index.js 
-2. check if post works as intended
+2. check if post works as intended (probably not)
 3. check if docker logs work as required
 4. update nginx.conf with a new location for /api and add basic auth to it 
 5. do optional tasks
+6. improvement: lots of code in index.js is repeating, we could set up functions for that to have cleaner code
 
 # Simple Node.js App with Docker Compose
 
@@ -12,6 +13,7 @@ This is a simple Node.js application that can be run using Docker Compose. The a
 - `/` returns a "Hello World!" message
 - `/api/environment` returns the environment variables of the container
 - `/api/headers` returns the request headers of the incoming request
+- `/api/post` returns items in provided body
 
 For the /api/ endpoints you can also use `?format=json`, `?format=xml`, or `?format=html` to return a specific format. HTML is used by default.
 
@@ -19,13 +21,20 @@ For the /api/ endpoints you can also use `?format=json`, `?format=xml`, or `?for
     ├── Dockerfile
     ├── docker-compose.yml
     ├── index.js
+    ├── package.json
     ├── nginx.conf
-    └── README.md
+    ├── README.md
+    ├── node_modules
+    └── package-lock.json
 
 - `Dockerfile`: instructions to build the Docker image for the Node.js app.
 - `docker-compose.yml`: the configuration file for Docker Compose.
 - `index.js`: the Node.js application code.
+- `package.json`: the Node.js project information file
 - `nginx.conf`: configuration file for the Nginx reverse proxy.
+- `README.md`: the readme file
+- `node_modules`: NodeJS modules directory
+- `package-lock.json`: file for keeping dependency information
 
 ## Requirements
 
