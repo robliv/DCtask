@@ -1,5 +1,5 @@
 # Use an official node runtime as a parent image
-FROM node:14
+FROM node:16-alpine
 
 # Set the working directory to /app
 WORKDIR /app
@@ -17,4 +17,4 @@ COPY . /app
 EXPOSE 3000
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
