@@ -6,13 +6,16 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - BGCOLOR=white
-      - FGCOLOR=black
+      - BGCOLOR=#42ac98
+      - FGCOLOR=#FE90A8
   proxy:
     image: nginx
     ports:
       - "8080:8080"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./.htpasswd:/etc/nginx/.htpasswd
     depends_on:
       - web
+
+
