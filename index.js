@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
   const path = url.split('?')[0];
   res.setHeader('Content-Type', 'text/html');
   let html = "<body style='background-color:"+bgColorStyle +';color:'+ fgColorStyle+";'><h1>Hello World!</h1>";
-  insertRequestInfo(timestamp, ip, method, path, userAgent)
+  //insertRequestInfo(timestamp, ip, method, path, userAgent)
   res.send(html);
 });
 
