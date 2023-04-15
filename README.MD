@@ -1,11 +1,12 @@
 # TODO
-~~1. fix color handling in index.js ~~
+
+~~1. fix color handling in index.js~~
 
 ~~2. check if post works as intended (probably not)~~
 
 ~~3. check if docker logs work as required~~
 
-~~4. update nginx.conf with a new location for /api and add basic auth to it ~~
+~~4. update nginx.conf with a new location for /api and add basic auth to it~~
 
 5. do optional tasks
 
