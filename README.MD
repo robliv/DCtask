@@ -52,7 +52,10 @@ For the /api/ endpoints you can also use `?format=json`, `?format=xml`, or `?for
     cd DCtask
 
 3. Start the containers using Docker Compose
-    docker-compose up --build
+    docker-compose up --build -d
+
+4. When done stop containers
+    docker-compose down
 
 This command will start two containers: one for the Node.js app and one for the Nginx reverse proxy. The Node.js app will be accessible at http://localhost:8080.
 

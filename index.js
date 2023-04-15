@@ -1,10 +1,31 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const mysql = require('mysql');
 
 dotenv.config();
 
 const app = express();
+
+// Create a connection pool for MySQL database
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'dbuser',
+  password: 'dbpw',
+  database: 'dc_task',
+});
+
+// Function to insert request information into database table
+function insertRequestInfo(timestamp, ip, method, path, userAgent) {
+  const sql = 'INSERT INTO access_log (timestamp, ip, method, path, user_agent) VALUES (?, ?, ?, ?, ?)';
+  const values = [timestamp, ip, method, path, userAgent];
+
+  pool.query(sql, values, (error, results, fields) => {
+    if (error) {
+      console.error('Error inserting request info into database:', error);
+    }
+  });
+}
 
 // Get colors from environment variables
 const bgColor = process.env.BGCOLOR;
@@ -25,8 +46,14 @@ else {
 
 // Root path response
 app.get('/', (req, res) => {
+  const { headers, method, url } = req;
+  const ip = headers['x-forwarded-for'] || req.socket.remoteAddress;
+  const userAgent = headers['user-agent'];
+  const timestamp = new Date().toISOString();
+  const path = url.split('?')[0];
   res.setHeader('Content-Type', 'text/html');
   let html = "<body style='background-color:"+bgColorStyle +';color:'+ fgColorStyle+";'><h1>Hello World!</h1>";
+  insertRequestInfo(timestamp, ip, method, path, userAgent)
   res.send(html);
 });
 

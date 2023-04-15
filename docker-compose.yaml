@@ -1,0 +1,33 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - BGCOLOR=#42ac98
+      - FGCOLOR=#FE90A8
+    # depends_on:
+    #   - db      
+  proxy:
+    image: nginx
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./.htpasswd:/etc/nginx/.htpasswd
+    depends_on:
+      - web
+  # db:
+  #   image: mysql:5.7
+  #   restart: always
+  #   ports:
+  #       - "3306:3306"
+  #   volumes:
+  #       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  #       - ./db_data:/var/lib/mysql
+  #   environment:
+  #       MYSQL_ROOT_USER: root
+  #       MYSQL_ROOT_PASSWORD: root
+  #       MYSQL_DATABASE: dc_task
+  #       MYSQL_USER: dbuser
+  #       MYSQL_PASSWORD: dbpw
